@@ -10,7 +10,7 @@ public class WaterTile extends Tile {
 	}
 	
 	public boolean isSolid() {
-		return false;
+		return true;
 	}
 
 

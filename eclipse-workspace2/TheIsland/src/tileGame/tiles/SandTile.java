@@ -11,6 +11,6 @@ public class SandTile extends Tile{
 	
 	
 	public boolean isSolid() {
-		return true;
+		return false;
 	}
 }
