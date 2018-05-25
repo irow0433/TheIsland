@@ -4,6 +4,10 @@ import java.awt.Graphics;
 
 import tileGame.Game;
 import tileGame.Handler;
+import tileGame.Entity.EntityManager;
+import tileGame.Entity.creatures.Enemy;
+import tileGame.Entity.creatures.Player;
+import tileGame.Entity.entities.statics.Tree;
 import tileGame.Utils.Utils;
 import tileGame.tiles.Tile;
 
@@ -14,6 +18,9 @@ public class World {
 	private int spawnX, spawnY;
 	private int[][] tiles;
 	
+	//Entities
+	private EntityManager entityManager;
+	
 	private int[][] animationTileCoords;
     private int currentAnimationIndex;
     private long lastIterationTime;
@@ -22,11 +29,22 @@ public class World {
 	
 	public World(Handler handler, String path){
 		this.handler = handler;
+		//entityManager = new EntityManager(handler, new Player(handler, 100, 100));
+		entityManager = new EntityManager(handler, new Player(handler, 900, 900));
+		entityManager.addEntity(new Tree(handler, 100, 200));
+		entityManager.addEntity(new Enemy(handler, 900, 900));
+		
 		loadWorld(path);
+		
+		entityManager.getPlayer().setX(spawnX);
+		entityManager.getPlayer().setY(spawnY);
+		
+		entityManager.getPlayer().setX(spawnX);
+		entityManager.getPlayer().setY(spawnY);
 	}
 	
 	public void tick(){
-		
+		entityManager.tick();
 	}
 	
 	public void render(Graphics g){
@@ -41,6 +59,8 @@ public class World {
 						(int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
 			}
 		}
+		//Entities
+		entityManager.render(g);
 	}
 	
 	public Tile getTile(int x, int y){

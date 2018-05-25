@@ -1,5 +1,6 @@
 package tileGame.state;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import tileGame.Game;
@@ -14,14 +15,14 @@ public class MenuState extends State {
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
-		
+		if(handler.getMouseManager().isLeftPressed())
+			State.setState(handler.getGame().gameState);
 	}
 
 	@Override
 	public void render(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		g.setColor(Color.RED);
+		g.fillRect(handler.getMouseManager().getMouseX(), handler.getMouseManager().getMouseY(), 8, 8);
 	}
 	
 	
